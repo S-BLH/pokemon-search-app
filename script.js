@@ -32,42 +32,26 @@ function displayPokemonInfo(pokemon) {
 
 async function fetchPokemonData(query) {
   try {
-    let pokemon;
-    if (query === '94') {
-      pokemon = {
-        name: 'gengar',
-        id: 94,
-        weight: 405,
-        height: 15,
-        types: [
-          { type: { name: 'ghost' } },
-          { type: { name: 'poison' } },
-        ],
-        stats: [
-          { base_stat: 60 }, // HP
-          { base_stat: 65 }, // Attack
-          { base_stat: 60 }, // Defense
-          { base_stat: 130 }, // Special Attack
-          { base_stat: 75 }, // Special Defense
-          { base_stat: 110 }, // Speed
-        ],
-        sprites: {
-          front_default: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png',
-        },
-      };
-      displayPokemonInfo(pokemon);
-    } else if (!Number.isNaN(parseInt(query, 10))) {
-      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-      if (!response.ok) {
-        throw new Error('Pokémon not found');
-      }
-      pokemon = await response.json();
-      displayPokemonInfo(pokemon);
-    } else {
-      throw new Error('Invalid input');
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+    if (!response.ok) {
+      throw new Error('Pokémon not found');
     }
+    const pokemon = await response.json();
+    displayPokemonInfo(pokemon);
   } catch (error) {
     console.log(error.message);
+    document.getElementById('pokemon-name').textContent = 'Pokémon not found';
+    document.getElementById('pokemon-id').textContent = '';
+    document.getElementById('weight').textContent = '';
+    document.getElementById('height').textContent = '';
+    document.getElementById('types').innerHTML = '';
+    document.getElementById('hp').textContent = '';
+    document.getElementById('attack').textContent = '';
+    document.getElementById('defense').textContent = '';
+    document.getElementById('special-attack').textContent = '';
+    document.getElementById('special-defense').textContent = '';
+    document.getElementById('speed').textContent = '';
+    document.getElementById('sprite').src = '';
   }
 }
 
