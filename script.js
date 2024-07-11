@@ -6,10 +6,10 @@ searchButton.addEventListener('click', () => {
   fetchPokemonData(query);
 });
 
-searchInput.addEventListener('keydown', (event) => {
+searchInput.addEventListener('keydown', async (event) => {
   if (event.key === 'Enter') {
     const query = searchInput.value.toLowerCase();
-    fetchPokemonData(query);
+    await fetchPokemonData(query);
   }
 });
 
@@ -40,7 +40,7 @@ async function fetchPokemonData(query) {
       };
       displayPokemonInfo(pokemon);
     } else {
-      if (!isNaN(parseInt(query))) {
+      if (!Number.isNaN(parseInt(query, 10))) {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
         if (!response.ok) {
           throw new Error('Pokémon not found');
@@ -68,7 +68,7 @@ function displayPokemonInfo(pokemon) {
   document.getElementById('height').textContent = `Height: ${pokemon.height}`;
 
   // Display Pokémon types
-  pokemon.types.forEach(type => {
+  pokemon.types.forEach((type) => {
     const typeElement = document.createElement('div');
     typeElement.textContent = type.type.name.toUpperCase();
     document.getElementById('types').appendChild(typeElement);
