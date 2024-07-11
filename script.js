@@ -1,9 +1,9 @@
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 
-searchButton.addEventListener('click', () => {
+searchButton.addEventListener('click', async () => {
   const query = searchInput.value.toLowerCase();
-  fetchPokemonData(query);
+  await fetchPokemonData(query);
 });
 
 searchInput.addEventListener('keydown', async (event) => {
