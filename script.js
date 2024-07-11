@@ -56,17 +56,15 @@ async function fetchPokemonData(query) {
         },
       };
       displayPokemonInfo(pokemon);
-    } else {
-      if (!Number.isNaN(parseInt(query, 10))) {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-        if (!response.ok) {
-          throw new Error('Pokémon not found');
-        }
-        pokemon = await response.json();
-        displayPokemonInfo(pokemon);
-      } else {
-        throw new Error('Invalid input');
+    } else if (!Number.isNaN(parseInt(query, 10))) {
+      const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+      if (!response.ok) {
+        throw new Error('Pokémon not found');
       }
+      pokemon = await response.json();
+      displayPokemonInfo(pokemon);
+    } else {
+      throw new Error('Invalid input');
     }
   } catch (error) {
     console.log(error.message);
