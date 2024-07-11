@@ -23,8 +23,8 @@ async function fetchPokemonData(query) {
         weight: 405,
         height: 15,
         types: [
-          { type: { name: 'ghost'} },
-          { type: { name: 'poison'} },
+          { type: { name: 'ghost' } },
+          { type: { name: 'poison' } },
         ],
         stats: [
           { base_stat: 60 }, // HP
@@ -68,7 +68,7 @@ function displayPokemonInfo(pokemon) {
   document.getElementById('height').textContent = `Height: ${pokemon.height}`;
 
   // Display Pokémon types
-  pokemon.types.forEach(type=> {
+  pokemon.types.forEach(type => {
     const typeElement = document.createElement('div');
     typeElement.textContent = type.type.name.toUpperCase();
     document.getElementById('types').appendChild(typeElement);
