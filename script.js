@@ -1,18 +1,6 @@
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
 
-searchButton.addEventListener('click', async () => {
-  const query = searchInput.value.toLowerCase();
-  await fetchPokemonData(query);
-});
-
-searchInput.addEventListener('keydown', async (event) => {
-  if (event.key === 'Enter') {
-    const query = searchInput.value.toLowerCase();
-    await fetchPokemonData(query);
-  }
-});
-
 async function fetchPokemonData(query) {
   try {
     let pokemon;
@@ -84,3 +72,15 @@ function displayPokemonInfo(pokemon) {
   // Display Pokémon sprite
   document.getElementById('sprite').src = pokemon.sprites.front_default;
 }
+
+searchButton.addEventListener('click', async () => {
+  const query = searchInput.value.toLowerCase();
+  await fetchPokemonData(query);
+});
+
+searchInput.addEventListener('keydown', async (event) => {
+  if (event.key === 'Enter') {
+    const query = searchInput.value.toLowerCase();
+    await fetchPokemonData(query);
+  }
+});
