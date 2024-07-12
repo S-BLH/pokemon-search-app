@@ -15,24 +15,6 @@ const speed = document.getElementById('speed');
 const sprite = document.getElementById('sprite');
 
 // Function declarations
-async function fetchPokemonData(query) {
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-    if (!response.ok) {
-      throw new Error('Pokémon not found');
-    }
-    const pokemon = await response.json();
-    displayPokemonInfo(pokemon);
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-function searchHandler() {
-  const searchValue = searchInput.value.toLowerCase();
-  fetchPokemonData(searchValue);
-}
-
 function displayPokemonInfo(pokemon) {
   // Clear previous search results
   sprite.src = '';
@@ -60,6 +42,24 @@ function displayPokemonInfo(pokemon) {
 
   // Display Pokémon sprite
   sprite.src = pokemon.sprites.front_default;
+}
+
+async function fetchPokemonData(query) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+    if (!response.ok) {
+      throw new Error('Pokémon not found');
+    }
+    const pokemon = await response.json();
+    displayPokemonInfo(pokemon);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+function searchHandler() {
+  const searchValue = searchInput.value.toLowerCase();
+  fetchPokemonData(searchValue);
 }
 
 // Event listeners
