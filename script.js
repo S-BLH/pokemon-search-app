@@ -15,15 +15,11 @@ const speed = document.getElementById('speed');
 const sprite = document.getElementById('sprite');
 
 // Add event listener to search button
-searchButton.addEventListener('click', () => {
-  const searchValue = searchInput.value.toLowerCase();
-  fetchPokemonData(searchValue);
-});
+searchButton.addEventListener('click', searchHandler);
 
 searchInput.addEventListener('keydown', (event) => {
   if (event.key === 'Enter') {
-    const searchValue = searchInput.value.toLowerCase();
-    fetchPokemonData(searchValue);
+    searchHandler();
   }
 });
 
@@ -67,4 +63,9 @@ function displayPokemonInfo(pokemon) {
 
   // Display Pokémon sprite
   sprite.src = pokemon.sprites.front_default;
+}
+
+function searchHandler() {
+  const searchValue = searchInput.value.toLowerCase();
+  fetchPokemonData(searchValue);
 }
