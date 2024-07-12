@@ -32,7 +32,7 @@ async function fetchPokemonData(query) {
     const pokemon = await response.json();
     displayPokemonInfo(pokemon);
   } catch (error) {
-    alert(error.message);
+    (error.message);
   }
 }
 
