@@ -14,26 +14,10 @@ const specialDefense = document.getElementById('special-defense');
 const speed = document.getElementById('speed');
 const sprite = document.getElementById('sprite');
 
-// Add event listener to search button
-searchButton.addEventListener('click', searchHandler);
-
-searchInput.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    searchHandler();
-  }
-});
-
-async function fetchPokemonData(query) {
-  try {
-    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
-    if (!response.ok) {
-      throw new Error('Pokémon not found');
-    }
-    const pokemon = await response.json();
-    displayPokemonInfo(pokemon);
-  } catch (error) {
-    console.error(error.message);
-  }
+// Function declarations
+function searchHandler() {
+  const searchValue = searchInput.value.toLowerCase();
+  fetchPokemonData(searchValue);
 }
 
 function displayPokemonInfo(pokemon) {
@@ -48,7 +32,7 @@ function displayPokemonInfo(pokemon) {
   height.textContent = `Height: ${pokemon.height}`;
 
   // Display Pokémon types
-  pokemon.types.forEach(type => {
+  pokemon.types.forEach((type) => {
     const typeElement = document.createElement('div');
     typeElement.textContent = type.type.name.toUpperCase();
     types.appendChild(typeElement);
@@ -65,7 +49,24 @@ function displayPokemonInfo(pokemon) {
   sprite.src = pokemon.sprites.front_default;
 }
 
-function searchHandler() {
-  const searchValue = searchInput.value.toLowerCase();
-  fetchPokemonData(searchValue);
+async function fetchPokemonData(query) {
+  try {
+    const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${query}`);
+    if (!response.ok) {
+      throw new Error('Pokémon not found');
+    }
+    const pokemon = await response.json();
+    displayPokemonInfo(pokemon);
+  } catch (error) {
+    console.error(error.message);
+  }
 }
+
+// Event listeners
+searchButton.addEventListener('click', searchHandler);
+
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    searchHandler();
+  }
+});
