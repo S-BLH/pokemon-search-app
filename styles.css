@@ -1,118 +1,47 @@
 body {
-  font-family: Arial, sans-serif;
   background-color: black;
-  margin: 0;
-  padding: 0;
+  font-family: Arial, sans-serif;
 }
 
-.container {
-  max-width: 800px;
+#container {
+  width: 500px;
   margin: 0 auto;
+  background-color: pink;
   padding: 20px;
-  border: 5px solid rgb(202, 10, 128);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 100px;
 }
 
-.search-bar {
-  display: flex;
-  justify-content: center;
+#title {
+  color: white;
+}
+
+#pokemon-container {
   margin-bottom: 20px;
 }
 
-.search-bar input {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid rgb(241, 60, 172);
-  border-radius: 4px;
-  width: 300px;
+#sprite {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 20px;
 }
 
-.search-bar button {
-  background-color: rgb(241, 60, 172);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-
-.search-bar button:hover {
-  background-color: blanchedalmond;
-  color: black;
-}
-
-.pokemon-info {
+#search-bar {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  background-color: rgb(238, 108, 188);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.pokemon-info h2 {
-  margin-top: 0;
-  font-size: 24px;
-  text-transform: uppercase;
-  color: rgb(242, 238, 231);
+#search-input {
+  margin-bottom: 10px;
 }
 
-.pokemon-info p {
-  margin: 5px 0;
-  color: rgb(242, 238, 231);
-}
-
-.pokemon-info .types {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.pokemon-info .types div {
-  background-color: #f0f0f0;
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin: 0 5px;
-}
-
-.pokemon-info .rectangle {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.pokemon-info .info-table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.pokemon-info .info-table th {
-  background-color: #f0f0f0;
-  padding: 10px;
-  border: 1px solid white;
-  text-align: center;
-  font-weight: bold;
-}
-
-.pokemon-info .info-table td {
-  border: 1px solid white;
-  padding: 10px;
-  text-align: center;
-}
-
-.holder {
-  border: 2px solid white;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-h1 {
-  color: rgb(242, 238, 231);
-  margin-top: 20px;
-  text-align: center;
-}
-
-#error-message {
-  color: red;
+#search-button {
+  background-color: #ff1bba;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
 }

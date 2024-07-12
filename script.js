@@ -1,34 +1,31 @@
+// Retrieve DOM elements
 const searchInput = document.getElementById('search-input');
 const searchButton = document.getElementById('search-button');
+const pokemonName = document.getElementById('pokemon-name');
+const pokemonId = document.getElementById('pokemon-id');
+const weight = document.getElementById('weight');
+const height = document.getElementById('height');
+const types = document.getElementById('types');
+const hp = document.getElementById('hp');
+const attack = document.getElementById('attack');
+const defense = document.getElementById('defense');
+const specialAttack = document.getElementById('special-attack');
+const specialDefense = document.getElementById('special-defense');
+const speed = document.getElementById('speed');
+const sprite = document.getElementById('sprite');
 
-function displayPokemonInfo(pokemon) {
-  // Clear previous search results
-  document.getElementById('sprite').src = '';
-  document.getElementById('types').innerHTML = '';
+// Add event listener to search button
+searchButton.addEventListener('click', () => {
+  const searchValue = searchInput.value.toLowerCase();
+  fetchPokemonData(searchValue);
+});
 
-  // Display Pokémon information
-  document.getElementById('pokemon-name').textContent = pokemon.name.toUpperCase();
-  document.getElementById('pokemon-id').textContent = `#${pokemon.id}`;
-  document.getElementById('weight').textContent = `Weight: ${pokemon.weight}`;
-  document.getElementById('height').textContent = `Height: ${pokemon.height}`;
-
-  // Display Pokémon types
-  pokemon.types.forEach((type) => {
-    const typeElement = document.createElement('div');
-    typeElement.textContent = type.type.name.toUpperCase();
-    document.getElementById('types').appendChild(typeElement);
-  });
-
-  document.getElementById('hp').textContent = pokemon.stats[0].base_stat;
-  document.getElementById('attack').textContent = pokemon.stats[1].base_stat;
-  document.getElementById('defense').textContent = pokemon.stats[2].base_stat;
-  document.getElementById('special-attack').textContent = pokemon.stats[3].base_stat;
-  document.getElementById('special-defense').textContent = pokemon.stats[4].base_stat;
-  document.getElementById('speed').textContent = pokemon.stats[5].base_stat;
-
-  // Display Pokémon sprite
-  document.getElementById('sprite').src = pokemon.sprites.front_default;
-}
+searchInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    const searchValue = searchInput.value.toLowerCase();
+    fetchPokemonData(searchValue);
+  }
+});
 
 async function fetchPokemonData(query) {
   try {
@@ -39,30 +36,35 @@ async function fetchPokemonData(query) {
     const pokemon = await response.json();
     displayPokemonInfo(pokemon);
   } catch (error) {
-    console.log(error.message);
-    document.getElementById('pokemon-name').textContent = 'Pokémon not found';
-    document.getElementById('pokemon-id').textContent = '';
-    document.getElementById('weight').textContent = '';
-    document.getElementById('height').textContent = '';
-    document.getElementById('types').innerHTML = '';
-    document.getElementById('hp').textContent = '';
-    document.getElementById('attack').textContent = '';
-    document.getElementById('defense').textContent = '';
-    document.getElementById('special-attack').textContent = '';
-    document.getElementById('special-defense').textContent = '';
-    document.getElementById('speed').textContent = '';
-    document.getElementById('sprite').src = '';
+    alert(error.message);
   }
 }
 
-searchButton.addEventListener('click', async () => {
-  const query = searchInput.value.toLowerCase();
-  await fetchPokemonData(query);
-});
+function displayPokemonInfo(pokemon) {
+  // Clear previous search results
+  sprite.src = '';
+  types.innerHTML = '';
 
-searchInput.addEventListener('keydown', async (event) => {
-  if (event.key === 'Enter') {
-    const query = searchInput.value.toLowerCase();
-    await fetchPokemonData(query);
-  }
-});
+  // Display Pokémon information
+  pokemonName.textContent = pokemon.name.toUpperCase();
+  pokemonId.textContent = `#${pokemon.id}`;
+  weight.textContent = `Weight: ${pokemon.weight}`;
+  height.textContent = `Height: ${pokemon.height}`;
+
+  // Display Pokémon types
+  pokemon.types.forEach(type => {
+    const typeElement = document.createElement('div');
+    typeElement.textContent = type.type.name.toUpperCase();
+    types.appendChild(typeElement);
+  });
+
+  hp.textContent = pokemon.stats[0].base_stat;
+  attack.textContent = pokemon.stats[1].base_stat;
+  defense.textContent = pokemon.stats[2].base_stat;
+  specialAttack.textContent = pokemon.stats[3].base_stat;
+  specialDefense.textContent = pokemon.stats[4].base_stat;
+  speed.textContent = pokemon.stats[5].base_stat;
+
+  // Display Pokémon sprite
+  sprite.src = pokemon.sprites.front_default;
+}
